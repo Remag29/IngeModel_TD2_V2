@@ -562,7 +562,7 @@
           <ownedFunctionalChains xsi:type="org.polarsys.capella.core.data.fa:FunctionalChain"
               id="05eca722-c7ff-4c37-8b37-7fad834c9faf" name="FunctionalChain 1">
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvementFunction"
-                id="52969482-f2b9-4b63-a7da-8c10df7a4f34" involved="#fa3e920a-4226-43ff-b200-609c64321535"/>
+                id="52969482-f2b9-4b63-a7da-8c10df7a4f34" summary="THREAT" involved="#fa3e920a-4226-43ff-b200-609c64321535"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvementFunction"
                 id="8af810ac-8a36-4bc0-92b3-ca780479ee6b" involved="#3bbe319f-b2dd-48d6-83dc-218fd3e87e5a"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvementFunction"
@@ -626,7 +626,8 @@
                 sourceElement="#75cf3c97-c523-4a83-8c7f-9c8d77016515"/>
           </ownedFunctionalChains>
           <ownedFunctions xsi:type="org.polarsys.capella.core.data.la:LogicalFunction"
-              id="fa3e920a-4226-43ff-b200-609c64321535" name="Voice Calling Way 1">
+              id="fa3e920a-4226-43ff-b200-609c64321535" name="Voice Calling Way 1"
+              summary="THREAT">
             <outputs xsi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort"
                 id="9e3bd28a-3ae6-4966-81c2-2a5dc4c36796" name="FOP 1">
               <ownedPortRealizations xsi:type="org.polarsys.capella.core.data.information:PortRealization"

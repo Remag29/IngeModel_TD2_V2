@@ -14,6 +14,9 @@ public class FunctionalChainInvolvments_exchange extends FunctionalChainInvolvme
         this.functionalExchange = functionalExchange;
     }
 
+    public FunctionalExchange getFunctionalExchange() {
+        return functionalExchange;
+    }
 
     @Override
     public String toString() {

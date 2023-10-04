@@ -27,10 +27,24 @@ public class FunctionalChainInvolvments_function extends FunctionalChainInvolvme
 
     public void setFunction(Function function) {
         this.function = function;
+        if(this.contamined) {
+            this.function.setContamined();
+        }
     }
 
     @Override
     public String toString() {
         return this.function.toString();
+    }
+
+    @Override
+    public Boolean getContamined() {
+        return this.function.getContamined();
+    }
+
+    @Override
+    public void setContamined() {
+        super.setContamined();
+        this.function.setContamined();
     }
 }

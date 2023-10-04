@@ -57,7 +57,7 @@ public class main {
 
             // input xml file */
             File fileXML = new File("TP_modelling.capella");
-            //File fileXML = new File("Cours_ENSIBS.capella");
+            //File fileXML = new File("Communication.capella");
 
             /* DOM library element used to store elements of xml files (only syntactic) */
             Document xml;
@@ -464,7 +464,41 @@ public class main {
             }
             System.out.println("--------------------------------------------------------");
 
-            //
+            // THREAT detection
+            // Get all the FunctionalChainInvolvments_exchange objects
+            ArrayList<FunctionalChainInvolvments_exchange> exchangeList = new ArrayList<>();
+            for (int i = 0; i < keys.size(); i++) {
+                if (operationTable2.get(keys.get(i)).getClass().getName().equals("FunctionalChainInvolvments_exchange")) {
+                    exchangeList.add((FunctionalChainInvolvments_exchange) operationTable2.get(keys.get(i)));
+                }
+            }
+
+            // Applied the contamination on the FunctionalChainInvolvments_function objects
+            while (isContaminationPossible(exchangeList)) {
+                // Apply the function applyContamination on all exchange objects on the list
+                for (int i = 0; i < exchangeList.size(); i++) {
+                    applyContamination(exchangeList.get(i));
+                }
+            }
+
+            // List all the FunctionalChainInvolvments_function objects that are contaminated
+            ArrayList<FunctionalChainInvolvments_function> contaminatedList = new ArrayList<>();
+            for (int i = 0; i < keys.size(); i++) {
+                if (operationTable2.get(keys.get(i)).getClass().getName().equals("FunctionalChainInvolvments_function")) {
+                    if (((FunctionalChainInvolvments_function) operationTable2.get(keys.get(i))).getContamined()) {
+                        contaminatedList.add((FunctionalChainInvolvments_function) operationTable2.get(keys.get(i)));
+                    }
+                }
+            }
+            System.out.println("--------------------------------------------------------");
+            System.out.println("| contaminatedList");
+            System.out.println("| size = " + contaminatedList.size());
+            for (int i = 0; i < contaminatedList.size(); i++) {
+                System.out.println("| uuid = " + contaminatedList.get(i).getId());
+                System.out.println("| name =" + contaminatedList.get(i).getFunction().getName());
+                System.out.println(contaminatedList.get(i).toString());
+            }
+            System.out.println("--------------------------------------------------------");
 
         }
         return n_return;
@@ -701,9 +735,50 @@ public class main {
         }
         return value;
     }
-}
 
-//    public static ArrayList<FunctionalChainInvolvments_function> getContaminedFonction(ArrayList<FunctionalChain> functionalChainArrayList) {
-//        // Search the terme "THREAT" in the summary of a FunctionnalChainInvolvment_function
-//
-//    }
+    // Fonction to test if threat contamination is possible on a FunctionalChainInvolvment_exchange
+    public static Boolean isContaminationPossible(FunctionalChainInvolvments_exchange fcie) {
+        // Get the FunctionalExchange object
+        FunctionalExchange fe = fcie.getFunctionalExchange();
+
+        // Get the source and target
+        FunctionalChainInvolvments_function source = (FunctionalChainInvolvments_function) fe.getSource();
+        FunctionalChainInvolvments_function target = (FunctionalChainInvolvments_function) fe.getTarget();
+
+        // Test if a contamination is possible
+        Boolean sourceContamined = source.getContamined();
+        Boolean targetContamined = target.getContamined();
+
+        if (sourceContamined && !targetContamined) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Fonction to test if a contamination is possible on an FunctionalChainInvolvments_exchange list
+    public static Boolean isContaminationPossible(ArrayList<FunctionalChainInvolvments_exchange> fcieList) {
+        // Test if a contamination is possible
+        for (int i = 0; i < fcieList.size(); i++) {
+            if (isContaminationPossible(fcieList.get(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Function to apply a contamination on a FunctionalChainInvolvments_exchange
+    public static void applyContamination(FunctionalChainInvolvments_exchange fcie) {
+        // Get the FunctionalExchange object
+        FunctionalExchange fe = fcie.getFunctionalExchange();
+
+        // Get the source and target
+        FunctionalChainInvolvments_function source = (FunctionalChainInvolvments_function) fe.getSource();
+        FunctionalChainInvolvments_function target = (FunctionalChainInvolvments_function) fe.getTarget();
+
+        // Set the target as contamined if source is contamined
+        if (source.getContamined()) {
+            target.setContamined();
+        }
+    }
+}

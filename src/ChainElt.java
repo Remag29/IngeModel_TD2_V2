@@ -45,7 +45,7 @@ public class ChainElt {
     }
 
     public Boolean getContamined() {
-        return contamined;
+        return this.contamined;
     }
 
     public void setSummary(String summary) {
