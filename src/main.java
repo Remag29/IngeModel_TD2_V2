@@ -411,6 +411,16 @@ public class main {
 
                         // Add the exchange object to the FunctionalChainInvolvment_exchange object
                         ((FunctionalChainInvolvments_exchange) obj).setFunctionalExchange(fe);
+
+                        // Get the source and target
+                        String source = obj.getName().replace("#", "").split(" ")[1];
+                        String target = obj.getName().replace("#", "").split(" ")[2];
+
+                        // Set the source and target on the FunctionalExchange object tageted by the _exchange
+                        // Get the FunctionalExchange object
+                        ((FunctionalExchange) operationTable2.get(obj.getName().replace("#", "").split(" ")[0])).setSource((FunctionalChainInvolvments_function) operationTable2.get(source));
+                        ((FunctionalExchange) operationTable2.get(obj.getName().replace("#", "").split(" ")[0])).setTarget((FunctionalChainInvolvments_function) operationTable2.get(target));
+
                         break;
 
                     case "FunctionalExchange":
@@ -423,24 +433,6 @@ public class main {
                         break;
 
                     default:
-                }
-            }
-
-            // Set the target and source on all FunctionalExchange objects
-            for (int i = 0; i < keys.size(); i++) {
-                if (operationTable2.get(keys.get(i)).getClass().getName().equals("FunctionalChainInvolvments_exchange")) {
-                    // Get the FunctionalChainInvolvment_exchange object
-                    FunctionalChainInvolvments_exchange fce = (FunctionalChainInvolvments_exchange) operationTable2.get(keys.get(i));
-
-                    // Get the source and target
-                    String source = fce.getName().replace("#", "").split(" ")[1];
-                    String target = fce.getName().replace("#", "").split(" ")[2];
-
-                    // Set the source and target on the FunctionalExchange object tageted by the _exchange
-                    // Get the FunctionalExchange object
-
-                    ((FunctionalExchange) operationTable2.get(fce.getName().replace("#", "").split(" ")[0])).setSource((FunctionalChainInvolvments_function) operationTable2.get(source));
-                    ((FunctionalExchange) operationTable2.get(fce.getName().replace("#", "").split(" ")[0])).setTarget((FunctionalChainInvolvments_function) operationTable2.get(target));
                 }
             }
 
