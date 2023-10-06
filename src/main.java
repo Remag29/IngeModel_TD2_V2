@@ -486,9 +486,9 @@ public class main {
             System.out.println("| contaminatedList");
             System.out.println("| size = " + contaminatedList.size());
             for (int i = 0; i < contaminatedList.size(); i++) {
-                System.out.println("| uuid = " + contaminatedList.get(i).getId());
-                System.out.println("| name =" + contaminatedList.get(i).getFunction().getName());
-                System.out.println(contaminatedList.get(i).toString());
+                // System.out.println("| uuid = " + contaminatedList.get(i).getId());
+                System.out.println("| name = " + contaminatedList.get(i).getFunction().getName());
+                // System.out.println(contaminatedList.get(i).toString());
             }
             System.out.println("--------------------------------------------------------");
 
